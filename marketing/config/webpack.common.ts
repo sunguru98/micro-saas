@@ -1,25 +1,24 @@
 import { Configuration } from "webpack";
 
 const config: Configuration = {
-  entry: "./src/index.ts",
+  entry: "./src/index",
+  output: {
+    publicPath: "auto",
+  },
   module: {
     rules: [
-      // TypeScript
+      // Babel (for JSX/TSX and React as well as Transpiling)
       {
-        test: /\.tsx?$/,
-        use: "ts-loader",
+        test: /\.(t|j)sx?$/,
+        loader: "babel-loader",
         exclude: /node_modules/,
-      },
-      // Babel (for JSX and React as well as Transpiling)
-      {
-        test: /\.m?(j|t)s$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-react", "@babel/preset-env"],
-            plugins: ["@babel/plugin-transform-runtime"],
-          },
+        options: {
+          presets: [
+            "@babel/preset-typescript",
+            "@babel/preset-env",
+            "@babel/preset-react",
+          ],
+          plugins: ["@babel/plugin-transform-runtime"],
         },
       },
     ],
@@ -30,3 +29,22 @@ const config: Configuration = {
 };
 
 export default config;
+
+/* ALIAS RULES */
+// rules: [
+//   // Babel (for JSX/TSX and React as well as Transpiling)
+//   {
+//     test: /\.tsx?$/,
+//     loader: "ts-loader",
+//     exclude: /node_modules/,
+//   },
+//   {
+//     test: /\.jsx?$/,
+//     loader: "babel-loader",
+//     exclude: /node_modules/,
+//     options: {
+//       presets: ["@babel/preset-react", "@babel/preset-env"],
+//       plugins: ["@babel/plugin-transform-runtime"],
+//     },
+//   },
+// ],

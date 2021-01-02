@@ -1,24 +1,21 @@
 import { Configuration, WebpackPluginInstance, container } from "webpack";
+import path from "path";
 import merge from "webpack-merge";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 
 import commonConfig from "./webpack.common";
 
 const plugins: WebpackPluginInstance[] = [
-  new HtmlWebpackPlugin({
-    template: "public/index.html",
-  }),
   new container.ModuleFederationPlugin({
     name: "marketing",
-    filename: "remoteEntry.ts",
+    filename: "remoteEntry.js",
     exposes: {
-      "./MarketingIndex": "./src/bootstrap.tsx",
+      "./MarketingIndex": "./src/bootstrap",
     },
-    // shared: {
-    //   react: {
-    //     eager: true,
-    //   },
-    // },
+  }),
+
+  new HtmlWebpackPlugin({
+    template: "public/index.html",
   }),
 ];
 
@@ -27,6 +24,7 @@ const config: Configuration = {
   devServer: {
     port: 8081,
     historyApiFallback: true,
+    contentBase: path.resolve(__dirname, "dist"),
   },
   devtool: "inline-source-map",
   plugins,

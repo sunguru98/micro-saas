@@ -1,4 +1,4 @@
-import { Configuration, WebpackPluginInstance } from "webpack";
+import { Configuration, WebpackPluginInstance, container } from "webpack";
 import merge from "webpack-merge";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 
@@ -7,6 +7,18 @@ import commonConfig from "./webpack.common";
 const plugins: WebpackPluginInstance[] = [
   new HtmlWebpackPlugin({
     template: "public/index.html",
+  }),
+  new container.ModuleFederationPlugin({
+    name: "marketing",
+    filename: "remoteEntry.ts",
+    exposes: {
+      "./MarketingIndex": "./src/bootstrap.tsx",
+    },
+    // shared: {
+    //   react: {
+    //     eager: true,
+    //   },
+    // },
   }),
 ];
 

@@ -29,22 +29,3 @@ const config: Configuration = {
 };
 
 export default config;
-
-/* ALIAS RULES */
-// rules: [
-//   // Babel (for JSX/TSX and React as well as Transpiling)
-//   {
-//     test: /\.tsx?$/,
-//     loader: "ts-loader",
-//     exclude: /node_modules/,
-//   },
-//   {
-//     test: /\.jsx?$/,
-//     loader: "babel-loader",
-//     exclude: /node_modules/,
-//     options: {
-//       presets: ["@babel/preset-react", "@babel/preset-env"],
-//       plugins: ["@babel/plugin-transform-runtime"],
-//     },
-//   },
-// ],

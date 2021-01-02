@@ -2,3 +2,9 @@ auth/node_modules
 container/node_modules
 dashboard/node_modules
 marketing/node_modules
+
+# Dist folder exclude
+auth/dist
+container/dist
+dashboard/dist
+marketing/dist

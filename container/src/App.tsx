@@ -1,7 +1,8 @@
 import React from "react";
+import MarketingIndex from "./components/MarketingIndex";
 
 const App = () => {
-  return <h1>Hi there</h1>;
+  return <MarketingIndex />;
 };
 
 export default App;

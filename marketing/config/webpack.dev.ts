@@ -4,6 +4,7 @@ import merge from "webpack-merge";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 
 import commonConfig from "./webpack.common";
+import packageJSON from "../package.json";
 
 const plugins: WebpackPluginInstance[] = [
   new container.ModuleFederationPlugin({
@@ -16,6 +17,7 @@ const plugins: WebpackPluginInstance[] = [
 
   new HtmlWebpackPlugin({
     template: "public/index.html",
+    shared: packageJSON.dependencies,
   }),
 ];
 

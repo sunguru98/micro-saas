@@ -4,6 +4,7 @@ import merge from "webpack-merge";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 
 import commonConfig from "./webpack.common";
+import packageJSON from "../package.json";
 
 const plugins: WebpackPluginInstance[] = [
   new container.ModuleFederationPlugin({
@@ -11,6 +12,7 @@ const plugins: WebpackPluginInstance[] = [
     remotes: {
       marketing: "marketing@http://localhost:8081/remoteEntry.js",
     },
+    shared: packageJSON.dependencies,
   }),
 
   new HtmlWebpackPlugin({

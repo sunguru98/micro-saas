@@ -8,3 +8,9 @@ auth/dist
 container/dist
 dashboard/dist
 marketing/dist
+
+# Error logs
+auth/yarn-error.log
+container/yarn-error.log
+dashboard/yarn-error.log
+marketing/yarn-error.log

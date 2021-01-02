@@ -1,8 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { StylesProvider } from "@material-ui/core";
+import { BrowserRouter as Router } from "react-router-dom";
+
+import App from "./App";
 
 const mount = (element: Element) => {
-  ReactDOM.render(<h1>Hi there</h1>, element);
+  ReactDOM.render(
+    <StylesProvider>
+      <Router>
+        <App />
+      </Router>
+    </StylesProvider>,
+    element
+  );
 };
 
 if (process.env.NODE_ENV === "development") {

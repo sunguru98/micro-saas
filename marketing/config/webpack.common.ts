@@ -12,7 +12,7 @@ const config: Configuration = {
       },
       // Babel (for JSX and React as well as Transpiling)
       {
-        test: /\.m?js$/,
+        test: /\.m?(j|t)s$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",

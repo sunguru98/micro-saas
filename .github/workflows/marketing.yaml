@@ -14,6 +14,8 @@ defaults:
   run:
     working-directory: packages/marketing
 
+# The jobs are mentioned here (In our case building the project to production version)
+jobs:
   build:
     runs-on: ubuntu-latest
     # Series of steps to be done for a job

@@ -9,9 +9,6 @@ const plugins: WebpackPluginInstance[] = [
 
 const config: Configuration = {
   entry: "./src/index",
-  output: {
-    publicPath: "auto",
-  },
   module: {
     rules: [
       // Babel (for JSX/TSX and React as well as Transpiling)

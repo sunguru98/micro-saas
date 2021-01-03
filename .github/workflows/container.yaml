@@ -27,6 +27,10 @@ jobs:
       - name: Building the project using prod config
         run: yarn build
 
+      # Flip environment variable to true
+      - name: Allowing unsecure commands
+        run: echo 'ACTIONS_ALLOW_UNSECURE_COMMANDS=true' >> $GITHUB_ENV
+
       # AWS related action so that we can push the "dist" folder to S3
       - uses: chrislennon/action-aws-cli@v1.1
       - name: Uploading dist folder to AWS S3
@@ -34,3 +38,7 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      # Flip environment variable to true
+      - name: Disabling unsecure commands
+        run: echo 'ACTIONS_ALLOW_UNSECURE_COMMANDS=false' >> $GITHUB_ENV

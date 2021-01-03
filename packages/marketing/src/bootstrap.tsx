@@ -1,13 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { StylesProvider } from "@material-ui/core";
+import { StylesProvider, createGenerateClassName } from "@material-ui/core";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import App from "./App";
 
+const randomClassName = createGenerateClassName({
+  productionPrefix: "marketing-",
+});
+
 const mount = (element: Element) => {
   ReactDOM.render(
-    <StylesProvider>
+    <StylesProvider generateClassName={randomClassName}>
       <Router>
         <App />
       </Router>

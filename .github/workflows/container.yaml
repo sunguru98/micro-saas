@@ -7,7 +7,7 @@ on:
       - main
       - stage
     paths:
-      - "*"
+      - "*/**"
       - "packages/container/**"
 
 # Change directory like how we do in terminal before starting any command.

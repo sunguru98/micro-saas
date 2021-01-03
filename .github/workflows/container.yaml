@@ -1,0 +1,36 @@
+name: container-deploy-CI
+
+# For push event only when container project is changed
+on:
+  push:
+    branches:
+      - main
+      - stage
+    paths:
+      - "packages/container/**"
+
+# Change directory like how we do in terminal before starting any command.
+defaults:
+  run:
+    working-directory: packages/container
+
+# The jobs are mentioned here (In our case building the project to production version)
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # Series of steps to be done for a job
+    steps:
+      # Clone the repo so that job can access it.
+      - uses: actions/checkout@v2
+      - name: Installing all dependencies
+        run: yarn
+      - name: Building the project using prod config
+        run: yarn build
+
+      # AWS related action so that we can push the "dist" folder to S3
+      - uses: chrislennon/action-aws-cli@v1.1
+      - name: Uploading dist folder to AWS S3
+        run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/container/latest
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

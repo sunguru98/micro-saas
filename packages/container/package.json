@@ -1,14 +1,13 @@
 {
-  "name": "marketing",
+  "name": "container",
   "version": "1.0.0",
   "scripts": {
     "dev": "webpack serve --config config/webpack.dev.ts",
-    "build": "webpack"
+    "build": "webpack --config config/webpack.prod.ts"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
-    "@types/react-dom": "^17.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0"
@@ -21,7 +20,7 @@
     "@babel/preset-typescript": "^7.12.7",
     "@types/html-webpack-plugin": "^3.2.4",
     "@types/node": "^14.14.19",
-    "@types/react-router-dom": "^5.1.7",
+    "@types/react-dom": "^17.0.0",
     "@types/webpack": "^4.41.25",
     "@types/webpack-dev-server": "^3.11.1",
     "@types/webpack-merge": "^4.1.5",
@@ -38,4 +37,3 @@
     "webpack-merge": "^5.2.0"
   }
 }
-

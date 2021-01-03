@@ -1,7 +1,6 @@
 import { Configuration, WebpackPluginInstance, container } from "webpack";
 import path from "path";
 import merge from "webpack-merge";
-import HtmlWebpackPlugin from "html-webpack-plugin";
 
 import commonConfig from "./webpack.common";
 import packageJSON from "../package.json";
@@ -13,10 +12,6 @@ const plugins: WebpackPluginInstance[] = [
       marketing: "marketing@http://localhost:8081/remoteEntry.js",
     },
     shared: packageJSON.dependencies,
-  }),
-
-  new HtmlWebpackPlugin({
-    template: "public/index.html",
   }),
 ];
 

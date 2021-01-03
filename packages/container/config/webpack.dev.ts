@@ -1,6 +1,8 @@
-import { Configuration, WebpackPluginInstance, container } from "webpack";
 import path from "path";
 import merge from "webpack-merge";
+
+import { Configuration, WebpackPluginInstance, container } from "webpack";
+import { CleanWebpackPlugin } from "clean-webpack-plugin";
 
 import commonConfig from "./webpack.common";
 import packageJSON from "../package.json";
@@ -13,6 +15,8 @@ const plugins: WebpackPluginInstance[] = [
     },
     shared: packageJSON.dependencies,
   }),
+
+  new CleanWebpackPlugin(),
 ];
 
 const config: Configuration = {

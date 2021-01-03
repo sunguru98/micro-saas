@@ -1,21 +1,19 @@
-name: container-deploy-CI
+name: marketing-deploy-CI
 
-# For push event only when container project is changed
+# For push event only when marketing project is changed
 on:
   push:
     branches:
       - main
       - stage
     paths:
-      - "packages/container/**"
+      - "packages/marketing/**"
 
 # Change directory like how we do in terminal before starting any command.
 defaults:
   run:
-    working-directory: packages/container
+    working-directory: packages/marketing
 
-# The jobs are mentioned here (In our case building the project to production version)
-jobs:
   build:
     runs-on: ubuntu-latest
     # Series of steps to be done for a job
@@ -25,8 +23,6 @@ jobs:
       - name: Installing all dependencies
         run: yarn
       - name: Building the project using prod config
-        env:
-          PROD_DOMAIN_URL: ${{ secrets.PROD_DOMAIN_URL }}
         run: yarn build
 
       # Flip environment variable to true
@@ -36,7 +32,7 @@ jobs:
       # AWS related action so that we can push the "dist" folder to S3
       - uses: chrislennon/action-aws-cli@v1.1
       - name: Uploading dist folder to AWS S3
-        run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/container/latest
+        run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/marketing/latest
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -47,7 +43,7 @@ jobs:
 
       # Create invalidation entry for index.html to update the latest version with respect to javascript files
       - name: Creating invalidation entry for AWS Cloudfront
-        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths "/container/latest/index.html"
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths "/marketing/latest/remoteEntry.js"
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

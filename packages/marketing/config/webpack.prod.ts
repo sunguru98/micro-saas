@@ -20,6 +20,7 @@ const config: Configuration = {
   mode: "production",
   output: {
     filename: "[name].[contenthash].js",
+    publicPath: "/marketing/latest/",
   },
   plugins,
 };

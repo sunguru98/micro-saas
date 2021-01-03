@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "webpack serve --config config/webpack.dev.ts",
-    "build": "webpack"
+    "build": "webpack --config config/webpack.prod.ts"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",

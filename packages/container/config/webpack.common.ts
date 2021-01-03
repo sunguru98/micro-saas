@@ -1,4 +1,11 @@
-import { Configuration } from "webpack";
+import { Configuration, WebpackPluginInstance } from "webpack";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+
+const plugins: WebpackPluginInstance[] = [
+  new HtmlWebpackPlugin({
+    template: "public/index.html",
+  }),
+];
 
 const config: Configuration = {
   entry: "./src/index",
@@ -26,6 +33,7 @@ const config: Configuration = {
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },
+  plugins,
 };
 
 export default config;

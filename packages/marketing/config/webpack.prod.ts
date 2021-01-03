@@ -9,6 +9,7 @@ const { ModuleFederationPlugin } = container;
 const plugins: WebpackPluginInstance[] = [
   new ModuleFederationPlugin({
     name: "marketing",
+    filename: "remoteEntry.js",
     exposes: {
       "./MarketingIndex": "./src/bootstrap",
     },

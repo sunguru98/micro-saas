@@ -25,6 +25,8 @@ jobs:
       - name: Installing all dependencies
         run: yarn
       - name: Building the project using prod config
+        env:
+          PROD_DOMAIN_URL: ${{ secrets.PROD_DOMAIN_URL }}
         run: yarn build
 
       # Flip environment variable to true

@@ -45,4 +45,4 @@ jobs:
 
       # Create invalidation entry for index.html to update the latest version with respect to javascript files
       - name: Creating invalidation entry for AWS Cloudfront
-        run: aws cloudfront create-invalidation --distribution-id E2MDZN9IOQUVUG --paths "/container/latest/index.html"
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths "/container/latest/index.html"

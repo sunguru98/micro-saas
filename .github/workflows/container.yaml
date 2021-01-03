@@ -42,3 +42,10 @@ jobs:
       # Flip environment variable to true
       - name: Disabling unsecure commands
         run: echo 'ACTIONS_ALLOW_UNSECURE_COMMANDS=false' >> $GITHUB_ENV
+
+      # Create invalidation entry for index.html to update the latest version with respect to javascript files
+      - name: Creating invalidation entry for AWS Cloudfront
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths "/container/latest/index.html"
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

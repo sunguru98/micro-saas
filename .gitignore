@@ -1,16 +1,16 @@
-auth/node_modules
-container/node_modules
-dashboard/node_modules
-marketing/node_modules
+packages/auth/node_modules
+packages/container/node_modules
+packages/dashboard/node_modules
+packages/marketing/node_modules
 
 # Dist folder exclude
-auth/dist
-container/dist
-dashboard/dist
-marketing/dist
+packages/auth/dist
+packages/container/dist
+packages/dashboard/dist
+packages/marketing/dist
 
 # Error logs
-auth/yarn-error.log
-container/yarn-error.log
-dashboard/yarn-error.log
-marketing/yarn-error.log
+packages/auth/yarn-error.log
+packages/container/yarn-error.log
+packages/dashboard/yarn-error.log
+packages/marketing/yarn-error.log

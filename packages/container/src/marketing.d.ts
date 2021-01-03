@@ -2,7 +2,7 @@ declare module "marketing/MarketingIndex" {
   const mount = (
     element: Element,
     { onNavigate }: { onNavigate?: LocationListener }
-  ): void => {};
+  ): { onParentNavigate: LocationListener } => {};
 
   export { mount };
 }

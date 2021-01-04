@@ -21,6 +21,9 @@ const plugins: WebpackPluginInstance[] = [
 
 const config: Configuration = {
   mode: "development",
+  output: {
+    publicPath: "http://localhost:8080/",
+  },
   devServer: {
     port: 8080,
     historyApiFallback: true,

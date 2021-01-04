@@ -4,12 +4,13 @@ import { CleanWebpackPlugin } from "clean-webpack-plugin";
 const plugins: WebpackPluginInstance[] = [new CleanWebpackPlugin()];
 
 const config: Configuration = {
-  entry: "./src/index.ts",
+  entry: "./src/index",
   module: {
     rules: [
       {
         test: /\.(t|j)sx?$/,
         loader: "babel-loader",
+        exclude: /node_modules/,
         options: {
           presets: [
             "@babel/preset-typescript",

@@ -14,11 +14,11 @@ const plugins: WebpackPluginInstance[] = [
     exposes: {
       "./MarketingIndex": "./src/bootstrap",
     },
+    shared: packageJSON.dependencies,
   }),
 
   new HtmlWebpackPlugin({
     template: "public/index.html",
-    shared: packageJSON.dependencies,
   }),
 
   new CleanWebpackPlugin(),

@@ -9,6 +9,7 @@ const AuthIndex: React.FC = () => {
   useEffect(() => {
     if (authRef.current) {
       const { onParentNavigate } = mount(authRef.current, {
+        initialPath: history.location.pathname,
         onNavigate: ({ pathname }: Location) => {
           history.location.pathname !== pathname && history.push(pathname);
         },

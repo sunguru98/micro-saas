@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 
 // Federated modules;
@@ -12,7 +12,7 @@ const App: React.FC = () => {
       <Header />
       <Switch>
         <Route path="/auth" component={AuthIndex} />
-        <Route exact path="/" component={MarketingIndex} />
+        <Route path="/" component={MarketingIndex} />
       </Switch>
     </div>
   );

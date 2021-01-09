@@ -27,12 +27,18 @@ const mount = (
   {
     defaultHistory,
     onNavigate,
+    initialPath,
   }: {
     defaultHistory?: History<unknown> | MemoryHistory;
     onNavigate?: LocationListener;
+    initialPath?: string;
   }
 ): { onParentNavigate: LocationListener } => {
-  const history = defaultHistory || createMemoryHistory();
+  const history =
+    defaultHistory ||
+    createMemoryHistory({
+      initialEntries: [initialPath ?? "/"],
+    });
   onNavigate && isMemoryHistory(history) && history.listen(onNavigate);
 
   ReactDOM.render(

@@ -27,9 +27,18 @@ const mount = (
   {
     onNavigate,
     defaultHistory,
-  }: { onNavigate?: LocationListener; defaultHistory?: History<unknown> }
+    initialPath,
+  }: {
+    onNavigate?: LocationListener;
+    defaultHistory?: History<unknown>;
+    initialPath?: string;
+  }
 ): { onParentNavigate: LocationListener } => {
-  const memoryHistory = defaultHistory || createMemoryHistory();
+  const memoryHistory =
+    defaultHistory ||
+    createMemoryHistory({
+      initialEntries: [initialPath ?? "/"],
+    });
 
   onNavigate &&
     isMemoryHistory(memoryHistory) &&

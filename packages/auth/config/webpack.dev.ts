@@ -1,36 +1,36 @@
-import { Configuration, WebpackPluginInstance, container } from "webpack";
-import path from "path";
 import merge from "webpack-merge";
+import path from "path";
+
+import { Configuration, WebpackPluginInstance, container } from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
-import { CleanWebpackPlugin } from "clean-webpack-plugin";
 
 import commonConfig from "./webpack.common";
 import packageJSON from "../package.json";
 
+const { ModuleFederationPlugin } = container;
+
 const plugins: WebpackPluginInstance[] = [
-  new container.ModuleFederationPlugin({
-    name: "marketing",
+  new ModuleFederationPlugin({
+    name: "auth",
     filename: "remoteEntry.js",
     exposes: {
-      "./MarketingIndex": "./src/bootstrap",
+      "./AuthIndex": "./src/bootstrap",
     },
     shared: packageJSON.dependencies,
   }),
 
   new HtmlWebpackPlugin({
-    template: "public/index.html",
+    template: "./public/index.html",
   }),
-
-  new CleanWebpackPlugin(),
 ];
 
 const config: Configuration = {
   mode: "development",
   output: {
-    publicPath: "http://localhost:8081/",
+    publicPath: "http://localhost:8082/",
   },
   devServer: {
-    port: 8081,
+    port: 8082,
     historyApiFallback: true,
     contentBase: path.resolve(__dirname, "dist"),
   },

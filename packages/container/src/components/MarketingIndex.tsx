@@ -8,6 +8,7 @@ const MarketingIndex: React.FC = () => {
 
   useEffect(() => {
     const { onParentNavigate } = mount(marketingRef.current!, {
+      initialPath: history.location.pathname,
       onNavigate: ({ pathname }: Location) => {
         history.location.pathname !== pathname && history.push(pathname);
       },

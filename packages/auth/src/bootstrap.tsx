@@ -2,19 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { StylesProvider, createGenerateClassName } from "@material-ui/core";
 import { Router } from "react-router-dom";
+
 import {
-  createMemoryHistory,
-  LocationListener,
-  createBrowserHistory,
   MemoryHistory,
   History,
+  createBrowserHistory,
+  createMemoryHistory,
+  LocationListener,
 } from "history";
-
 import App from "./App";
-
-const randomClassName = createGenerateClassName({
-  productionPrefix: "marketing-",
-});
 
 function isMemoryHistory(
   history: History | MemoryHistory
@@ -22,31 +18,32 @@ function isMemoryHistory(
   return (history as MemoryHistory).listen !== undefined;
 }
 
+const generateClassName = createGenerateClassName({
+  productionPrefix: "auth-",
+});
+
 const mount = (
   element: Element,
   {
-    onNavigate,
     defaultHistory,
+    onNavigate,
     initialPath,
   }: {
+    defaultHistory?: History<unknown> | MemoryHistory;
     onNavigate?: LocationListener;
-    defaultHistory?: History<unknown>;
     initialPath?: string;
   }
 ): { onParentNavigate: LocationListener } => {
-  const memoryHistory =
+  const history =
     defaultHistory ||
     createMemoryHistory({
       initialEntries: [initialPath ?? "/"],
     });
-
-  onNavigate &&
-    isMemoryHistory(memoryHistory) &&
-    memoryHistory.listen(onNavigate);
+  onNavigate && isMemoryHistory(history) && history.listen(onNavigate);
 
   ReactDOM.render(
-    <StylesProvider generateClassName={randomClassName}>
-      <Router history={memoryHistory}>
+    <StylesProvider generateClassName={generateClassName}>
+      <Router history={history}>
         <App />
       </Router>
     </StylesProvider>,
@@ -55,14 +52,13 @@ const mount = (
 
   return {
     onParentNavigate({ pathname }) {
-      memoryHistory.location.pathname !== pathname &&
-        memoryHistory.push(pathname);
+      history.location.pathname !== pathname && history.push(pathname);
     },
   };
 };
 
 if (process.env.NODE_ENV === "development") {
-  const rootElement = document.querySelector("#marketing-root-dev");
+  const rootElement = document.querySelector("#dev-auth-root");
   rootElement && mount(rootElement, { defaultHistory: createBrowserHistory() });
 }
 

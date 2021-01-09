@@ -12,6 +12,7 @@ const plugins: WebpackPluginInstance[] = [
     name: "container",
     remotes: {
       marketing: "marketing@http://localhost:8081/remoteEntry.js",
+      auth: "auth@http://localhost:8082/remoteEntry.js",
     },
     shared: packageJSON.dependencies,
   }),
@@ -21,6 +22,9 @@ const plugins: WebpackPluginInstance[] = [
 
 const config: Configuration = {
   mode: "development",
+  output: {
+    publicPath: "http://localhost:8080/",
+  },
   devServer: {
     port: 8080,
     historyApiFallback: true,

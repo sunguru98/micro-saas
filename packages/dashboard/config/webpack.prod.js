@@ -25,4 +25,4 @@ const config = {
   },
 };
 
-export default merge(commonConfig, config);
+module.exports = merge(commonConfig, config);

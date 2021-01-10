@@ -1,14 +1,13 @@
-import merge from "webpack-merge";
-import path from "path";
-import { Configuration, WebpackPluginInstance, container } from "webpack";
-import HtmlWebpackPlugin from "html-webpack-plugin";
+const merge = require("webpack-merge");
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-import commonConfig from "./webpack.common";
-import packageJSON from "../package.json";
+const commonConfig = require("./webpack.common");
+const packageJSON = require("../package.json");
 
 const { ModuleFederationPlugin } = container;
 
-const plugins: WebpackPluginInstance[] = [
+const plugins = [
   new HtmlWebpackPlugin({
     template: "./public/index.html",
   }),
@@ -22,7 +21,7 @@ const plugins: WebpackPluginInstance[] = [
   }),
 ];
 
-const config: Configuration = {
+const config = {
   mode: "development",
   output: {
     publicPath: "http://localhost:8083/",
@@ -38,4 +37,4 @@ const config: Configuration = {
   plugins,
 };
 
-export default merge(commonConfig, config);
+module.exports = merge(commonConfig, config);

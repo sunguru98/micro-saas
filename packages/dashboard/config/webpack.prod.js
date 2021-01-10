@@ -1,13 +1,10 @@
-import merge from "webpack-merge";
-import { Configuration, container } from "webpack";
-import { WebpackPluginInstance } from "webpack";
-
-import packageJSON from "../package.json";
-import commonConfig from "./webpack.common";
+const merge = require("webpack-merge");
+const packageJSON = require("../package.json");
+const commonConfig = require("./webpack.common");
 
 const { ModuleFederationPlugin } = container;
 
-const plugins: WebpackPluginInstance[] = [
+const plugins = [
   new ModuleFederationPlugin({
     name: "dashboard",
     filename: "remoteEntry.js",
@@ -18,7 +15,7 @@ const plugins: WebpackPluginInstance[] = [
   }),
 ];
 
-const config: Configuration = {
+const config = {
   mode: "production",
   plugins,
   output: {

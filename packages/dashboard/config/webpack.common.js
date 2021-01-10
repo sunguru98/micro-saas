@@ -1,13 +1,9 @@
-import { Configuration, WebpackPluginInstance } from "webpack";
-import { CleanWebpackPlugin } from "clean-webpack-plugin";
-import { VueLoaderPlugin } from "vue-loader";
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const { VueLoaderPlugin } = require("vue-loader");
 
-const plugins: WebpackPluginInstance[] = [
-  new CleanWebpackPlugin(),
-  new VueLoaderPlugin(),
-];
+const plugins = [new CleanWebpackPlugin(), new VueLoaderPlugin()];
 
-const config: Configuration = {
+const config = {
   entry: "./src/index.js",
   module: {
     rules: [
@@ -34,4 +30,4 @@ const config: Configuration = {
   plugins,
 };
 
-export default config;
+module.exports = config;

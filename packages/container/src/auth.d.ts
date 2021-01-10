@@ -4,7 +4,7 @@ declare module "auth/AuthIndex" {
     extraArgs: {
       onNavigate?: LocationListener;
       initialPath?: string;
-      onSignIn: () => {};
+      onSignIn: (user: { email: string }) => void;
     }
   ): { onParentNavigate: LocationListener } => {};
 

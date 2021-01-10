@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -50,9 +50,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignIn: React.FC<RouteComponentProps & { onSignIn: () => {} }> = ({
-  onSignIn,
-}) => {
+const SignIn: React.FC<
+  RouteComponentProps & { onSignIn: (user: { email: string }) => void }
+> = ({ onSignIn }) => {
+  const [email, setEmail] = useState<string>("");
   const classes = useStyles();
 
   return (
@@ -79,6 +80,8 @@ const SignIn: React.FC<RouteComponentProps & { onSignIn: () => {} }> = ({
             name="email"
             autoComplete="email"
             autoFocus
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -101,7 +104,7 @@ const SignIn: React.FC<RouteComponentProps & { onSignIn: () => {} }> = ({
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={onSignIn}
+            onClick={() => onSignIn({ email })}
           >
             Sign In
           </Button>

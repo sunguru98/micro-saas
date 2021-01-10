@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import { mount } from "auth/AuthIndex";
-import { useHistory } from "react-router-dom";
+import { RouteComponentProps, useHistory } from "react-router-dom";
 
-const AuthIndex: React.FC = () => {
+const AuthIndex: React.FC<
+  RouteComponentProps & { onSignIn: (user: { email: string }) => void }
+> = ({ onSignIn: signInCallback }) => {
   const authRef = useRef<null | HTMLDivElement>(null);
   const history = useHistory();
 
@@ -13,9 +15,9 @@ const AuthIndex: React.FC = () => {
         onNavigate: ({ pathname }: Location) => {
           history.location.pathname !== pathname && history.push(pathname);
         },
-        onSignIn: () => {
-          console.log("User Signed in");
-          return {};
+        onSignIn: (user: { email: string }) => {
+          signInCallback(user);
+          history.push("/dashboard");
         },
       });
 

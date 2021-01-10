@@ -3,7 +3,9 @@ import { Switch, Route } from "react-router-dom";
 import SignIn from "./components/Signin";
 import SignUp from "./components/Signup";
 
-const App: React.FC<{ onSignIn: () => {} }> = ({ onSignIn }) => {
+const App: React.FC<{ onSignIn: (user: { email: string }) => void }> = ({
+  onSignIn,
+}) => {
   return (
     <Switch>
       <Route

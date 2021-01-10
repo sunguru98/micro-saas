@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 
 import Header from "./components/Header";
@@ -9,12 +9,23 @@ const AuthIndex = lazy(() => import("./components/AuthIndex"));
 const MarketingIndex = lazy(() => import("./components/MarketingIndex"));
 
 const App: React.FC = () => {
+  const [user, setUser] = useState<null | { email: string }>(null);
+
+  useEffect(() => {
+    console.log("Current user ", user);
+  }, [user]);
+
   return (
     <div>
-      <Header />
+      <Header signedIn={!!user} onSignOut={() => setUser(null)} />
       <Suspense fallback={<ProgressBar />}>
         <Switch>
-          <Route path="/auth" component={AuthIndex} />
+          <Route
+            path="/auth"
+            render={(routeProps) => (
+              <AuthIndex {...routeProps} onSignIn={setUser} />
+            )}
+          />
           <Route path="/" component={MarketingIndex} />
         </Switch>
       </Suspense>

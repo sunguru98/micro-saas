@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -47,9 +47,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignUp: React.FC<RouteComponentProps & { onSignIn: () => {} }> = ({
-  onSignIn,
-}) => {
+const SignUp: React.FC<
+  RouteComponentProps & { onSignIn: (user: { email: string }) => void }
+> = ({ onSignIn }) => {
+  const [email, setEmail] = useState<string>("");
   const classes = useStyles();
 
   return (
@@ -99,6 +100,8 @@ const SignUp: React.FC<RouteComponentProps & { onSignIn: () => {} }> = ({
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -126,7 +129,7 @@ const SignUp: React.FC<RouteComponentProps & { onSignIn: () => {} }> = ({
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={onSignIn}
+            onClick={(e) => onSignIn({ email })}
           >
             Sign Up
           </Button>

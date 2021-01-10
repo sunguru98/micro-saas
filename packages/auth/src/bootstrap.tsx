@@ -33,7 +33,7 @@ const mount = (
     defaultHistory?: History<unknown> | MemoryHistory;
     onNavigate?: LocationListener;
     initialPath?: string;
-    onSignIn: () => {};
+    onSignIn: (user: { email: string }) => void;
   }
 ): { onParentNavigate: LocationListener } => {
   const history =
@@ -64,8 +64,8 @@ if (process.env.NODE_ENV === "development") {
   rootElement &&
     mount(rootElement, {
       defaultHistory: createBrowserHistory(),
-      onSignIn() {
-        return {};
+      onSignIn(user) {
+        console.log("user signed in");
       },
     });
 }

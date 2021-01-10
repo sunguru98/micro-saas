@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -10,7 +10,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -50,7 +50,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignIn: React.FC<{ onSignIn: () => {} }> = ({ onSignIn }) => {
+const SignIn: React.FC<
+  RouteComponentProps & { onSignIn: (user: { email: string }) => void }
+> = ({ onSignIn }) => {
+  const [email, setEmail] = useState<string>("");
   const classes = useStyles();
 
   return (
@@ -77,6 +80,8 @@ const SignIn: React.FC<{ onSignIn: () => {} }> = ({ onSignIn }) => {
             name="email"
             autoComplete="email"
             autoFocus
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -99,7 +104,7 @@ const SignIn: React.FC<{ onSignIn: () => {} }> = ({ onSignIn }) => {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={onSignIn}
+            onClick={() => onSignIn({ email })}
           >
             Sign In
           </Button>

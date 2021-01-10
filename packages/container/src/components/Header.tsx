@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Header: React.FC<{ signedIn?: boolean; onSignOut?: () => void }> = ({
+const Header: React.FC<{ signedIn: boolean; onSignOut: () => void }> = ({
   signedIn,
   onSignOut,
 }) => {

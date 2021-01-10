@@ -17,7 +17,6 @@ const AuthIndex: React.FC<
         },
         onSignIn: (user: { email: string }) => {
           signInCallback(user);
-          history.push("/dashboard");
         },
       });
 

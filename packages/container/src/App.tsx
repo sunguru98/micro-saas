@@ -1,5 +1,11 @@
 import React, { lazy, Suspense, useEffect, useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import {
+  Redirect,
+  Route,
+  RouteComponentProps,
+  Switch,
+  withRouter,
+} from "react-router-dom";
 
 import Header from "./components/Header";
 import ProgressBar from "./components/ProgressBar";
@@ -9,11 +15,12 @@ const AuthIndex = lazy(() => import("./components/AuthIndex"));
 const MarketingIndex = lazy(() => import("./components/MarketingIndex"));
 const DashboardIndex = lazy(() => import("./components/DashboardIndex"));
 
-const App: React.FC = () => {
+const App: React.FC<RouteComponentProps> = ({ history }) => {
   const [user, setUser] = useState<null | { email: string }>(null);
 
   useEffect(() => {
     console.log("Current user ", user);
+    if (user) history.push("/dashboard");
   }, [user]);
 
   return (
@@ -29,9 +36,13 @@ const App: React.FC = () => {
           />
           <Route
             path="/dashboard"
-            render={(rProps) => (
-              <DashboardIndex {...rProps} signedIn={!!user} />
-            )}
+            render={(rProps) =>
+              user ? (
+                <DashboardIndex {...rProps} signedIn={!!user} />
+              ) : (
+                <Redirect to="/" />
+              )
+            }
           />
           <Route path="/" component={MarketingIndex} />
         </Switch>
@@ -40,4 +51,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default withRouter(App);

@@ -7,6 +7,7 @@ import ProgressBar from "./components/ProgressBar";
 // Federated modules;
 const AuthIndex = lazy(() => import("./components/AuthIndex"));
 const MarketingIndex = lazy(() => import("./components/MarketingIndex"));
+const DashboardIndex = lazy(() => import("./components/DashboardIndex"));
 
 const App: React.FC = () => {
   const [user, setUser] = useState<null | { email: string }>(null);
@@ -24,6 +25,12 @@ const App: React.FC = () => {
             path="/auth"
             render={(routeProps) => (
               <AuthIndex {...routeProps} onSignIn={setUser} />
+            )}
+          />
+          <Route
+            path="/dashboard"
+            render={(rProps) => (
+              <DashboardIndex {...rProps} signedIn={!!user} />
             )}
           />
           <Route path="/" component={MarketingIndex} />

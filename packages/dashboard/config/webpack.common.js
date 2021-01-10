@@ -11,7 +11,7 @@ const config = {
       { test: /\.vue$/, loader: "vue-loader" },
       {
         test: /\.s?css$/,
-        use: ["vue-style-loader", "sass-loader", "css-loader", "style-loader"],
+        use: ["vue-style-loader", "style-loader", "css-loader", "sass-loader"],
       },
       {
         test: /\.m?js$/,

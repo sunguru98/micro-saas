@@ -8,7 +8,7 @@ const mount = (element) => {
 
 if (process.env.NODE_ENV === "development") {
   const rootElement = document.querySelector("#dev-dashboard-root");
-  rootElment && mount(rootElement);
+  rootElement && mount(rootElement);
 }
 
 export { mount };

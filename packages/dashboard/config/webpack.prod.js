@@ -1,4 +1,5 @@
-const merge = require("webpack-merge");
+const { merge } = require("webpack-merge");
+const { container } = require("webpack");
 const packageJSON = require("../package.json");
 const commonConfig = require("./webpack.common");
 

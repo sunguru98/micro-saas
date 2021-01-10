@@ -1,1 +1,3 @@
-export default "";
+const mount = (element: Element) => {};
+
+export { mount };

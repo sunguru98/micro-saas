@@ -31,6 +31,9 @@ const config: Configuration = {
     port: 8083,
     historyApiFallback: true,
     contentBase: path.resolve(__dirname, "dist"),
+    headers: {
+      "Access-Control-Allow-Origin": "http://localhost:8080",
+    },
   },
   plugins,
 };

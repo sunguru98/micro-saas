@@ -13,6 +13,10 @@ const AuthIndex: React.FC = () => {
         onNavigate: ({ pathname }: Location) => {
           history.location.pathname !== pathname && history.push(pathname);
         },
+        onSignIn: () => {
+          console.log("User Signed in");
+          return {};
+        },
       });
 
       history.listen(onParentNavigate);

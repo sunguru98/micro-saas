@@ -28,10 +28,12 @@ const mount = (
     defaultHistory,
     onNavigate,
     initialPath,
+    onSignIn,
   }: {
     defaultHistory?: History<unknown> | MemoryHistory;
     onNavigate?: LocationListener;
     initialPath?: string;
+    onSignIn: () => {};
   }
 ): { onParentNavigate: LocationListener } => {
   const history =
@@ -44,7 +46,7 @@ const mount = (
   ReactDOM.render(
     <StylesProvider generateClassName={generateClassName}>
       <Router history={history}>
-        <App />
+        <App onSignIn={onSignIn} />
       </Router>
     </StylesProvider>,
     element
@@ -59,7 +61,13 @@ const mount = (
 
 if (process.env.NODE_ENV === "development") {
   const rootElement = document.querySelector("#dev-auth-root");
-  rootElement && mount(rootElement, { defaultHistory: createBrowserHistory() });
+  rootElement &&
+    mount(rootElement, {
+      defaultHistory: createBrowserHistory(),
+      onSignIn() {
+        return {};
+      },
+    });
 }
 
 export { mount };

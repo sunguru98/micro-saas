@@ -2,7 +2,8 @@
   "name": "dashboard",
   "version": "1.0.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack serve --config ./config/webpack.dev.ts",
+    "build": "webpack --config ./config/webpack.prod.ts"
   },
   "dependencies": {
     "chart.js": "^2.9.4",
@@ -15,6 +16,7 @@
     "@babel/core": "^7.12.3",
     "@babel/plugin-transform-runtime": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
+    "@types/clean-webpack-plugin": "^0.1.3",
     "@types/html-webpack-plugin": "^3.2.4",
     "@types/node": "^14.14.19",
     "@types/webpack": "^4.41.25",
@@ -25,6 +27,7 @@
     "css-loader": "^5.0.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^4.5.0",
+    "clean-webpack-plugin": "^3.0.0",
     "node-sass": "^4.14.1",
     "sass-loader": "^10.0.4",
     "style-loader": "^2.0.0",
